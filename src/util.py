@@ -7,6 +7,10 @@ Created on Thu Nov 12 15:35:40 2020
 
 puzzle_filepath = "../puzzles/initial_puzzle.txt"
 
+"""
+This function reads the filepath containing the input file and returns
+a list containing each line of the input file as an array of ints
+"""
 def read_puzzle():
     puzzle_arr = []
     
