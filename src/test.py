@@ -13,4 +13,6 @@ puzzle_1 = puzzle_arr[1]
 
 p = Puzzle(2, 4, puzzle_1, 0)
 
-print(p.regularMoveUp())
+p.showState()
+p.moveRight_wrap()
+p.showState()
