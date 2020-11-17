@@ -10,7 +10,9 @@ Updated on Thu Nov 16 - Separated moves + added g_cost
 """
 class Puzzle:
     def __init__(self, height, width, init_list, g_cost):
-        self.matrix = init_list
+        self.matrix = []
+        for i in init_list:
+            self.matrix.append(i)
         self.height = height
         self.width = width
         self.g_cost = g_cost
