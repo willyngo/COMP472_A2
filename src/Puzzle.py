@@ -120,6 +120,52 @@ class Puzzle:
         child.__swapNumbers(zero_index, move_index)
         return child
     
+    def moveUpWrap(self):
+        # only for scale up
+        if self.height <= 2:
+            return None
+        
+        zero_index = self.matrix.index(0)
+        move_index = -1
+        w = self.width
+        h = self.height
+        
+        #if the zero is located on top left or right corner
+        if zero_index == self.upLeftCorner or zero_index == self.upRightCorner:
+            #wrap around and swap with right corner same row
+            move_index = zero_index + (w * (h - 1))
+        else:
+            #print("Cannot wrap left if zero is not in the up corner")
+            return None
+        
+        #swap the tiles
+        child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 2)
+        child.__swapNumbers(zero_index, move_index)
+        return child
+    
+    def moveDownWrap(self):
+        # only for scale up
+        if self.height <= 2:
+            return None
+        
+        zero_index = self.matrix.index(0)
+        move_index = -1
+        w = self.width
+        h = self.height
+        
+        #if the zero is located on bottom left or right corner
+        if zero_index == self.downLeftCorner or zero_index == self.downRightCorner:
+            #wrap around and swap with right corner same row
+            move_index = zero_index - (w * (h - 1))
+        else:
+            #print("Cannot wrap left if zero is not in the down corner")
+            return None
+        
+        #swap the tiles
+        child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 2)
+        child.__swapNumbers(zero_index, move_index)
+        return child
+    
     
     #======================== DIAGONAL MOVEMENTS ===========================#
     
