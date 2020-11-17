@@ -38,7 +38,7 @@ class Puzzle:
             child.__swapNumbers(zero_index, move_index)
             return child
         else:
-            print("Cannot move up if zero is located on top row")
+            #print("Cannot move up if zero is located on top row")
             return None
         
     def moveDown(self):
@@ -51,7 +51,7 @@ class Puzzle:
             child.__swapNumbers(zero_index, move_index)
             return child
         else:
-            print("Cannot move down if zero is located on bottom row")
+            #print("Cannot move down if zero is located on bottom row")
             return None
         
     def moveRight(self):
@@ -60,7 +60,7 @@ class Puzzle:
             
         # Check if we went out of range
         if move_index % self.width == 0:
-            print("Cannot move right if zero is located on far right")
+            #print("Cannot move right if zero is located on far right")
             return None
 
         #swap the tiles
@@ -74,7 +74,7 @@ class Puzzle:
             
         # Check if we went out of range
         if move_index % self.width == self.width -1 or move_index < 0:
-            print("Cannot move left if zero is located on far left")
+            #print("Cannot move left if zero is located on far left")
             return None
         
         #swap the tiles
@@ -94,7 +94,7 @@ class Puzzle:
             #wrap around and swap with left corner same row
             move_index = zero_index - (w - 1)
         else:
-            print("Cannot wrap right if zero is not in the corner")
+            #print("Cannot wrap right if zero is not in the corner")
             return None
         
         #swap the tiles
@@ -112,7 +112,7 @@ class Puzzle:
             #wrap around and swap with right corner same row
             move_index = zero_index + (w - 1)
         else:
-            print("Cannot wrap left if zero is not in the corner")
+            #print("Cannot wrap left if zero is not in the corner")
             return None
         
         #swap the tiles
@@ -132,7 +132,7 @@ class Puzzle:
         if zero_index == self.downLeftCorner:
             move_index = zero_index - w + 1
         else:
-            print("Can only perform an upward diagonal if zero is located on a bottom corner.")
+            #print("Can only perform an upward diagonal if zero is located on a bottom corner.")
             return None
             
         #swap the tiles
@@ -149,7 +149,7 @@ class Puzzle:
         if zero_index == self.downRightCorner:
             move_index = zero_index - w - 1
         else:
-            print("Can only perform a upward diagonal if zero is located on bottom corner")
+            #print("Can only perform a upward diagonal if zero is located on bottom corner")
             return None
         
         #swap the tiles
@@ -166,7 +166,7 @@ class Puzzle:
         if zero_index == self.upLeftCorner:
             move_index = zero_index + (w + 1)
         else:
-            print("Can only perform an downward diagonal if zero is located on a top corner.")
+            #print("Can only perform an downward diagonal if zero is located on a top corner.")
             return None
             
         #swap the tiles
@@ -183,7 +183,7 @@ class Puzzle:
         if zero_index == self.upRightCorner:
             move_index = zero_index + w - 1
         else:
-            print("Can only perform a downward diagonal if zero is located on top corner")
+            #print("Can only perform a downward diagonal if zero is located on top corner")
             return None
         
         #swap the tiles
@@ -201,7 +201,7 @@ class Puzzle:
         if zero_index == self.downLeftCorner:
             move_index = self.width - 1
         else:
-            print("Can only perform an upward diagonal if zero is located on a bottom corner.")
+            #print("Can only perform an upward diagonal if zero is located on a bottom corner.")
             return None
             
         #swap the tiles
@@ -217,7 +217,7 @@ class Puzzle:
         if zero_index == self.downRightCorner:
             move_index = 0
         else:
-            print("Can only perform a upward diagonal if zero is located on bottom corner")
+            #print("Can only perform a upward diagonal if zero is located on bottom corner")
             return None
         
         #swap the tiles
@@ -233,7 +233,7 @@ class Puzzle:
         if zero_index == self.upLeftCorner:
             move_index = len(self.matrix) - 1
         else:
-            print("Can only perform an downward diagonal if zero is located on a top corner.")
+            #print("Can only perform an downward diagonal if zero is located on a top corner.")
             return None
             
         #swap the tiles
@@ -249,7 +249,7 @@ class Puzzle:
         if zero_index == self.upRightCorner:
             move_index = len(self.matrix) - self.width
         else:
-            print("Can only perform a downward diagonal if zero is located on top corner")
+            #print("Can only perform a downward diagonal if zero is located on top corner")
             return None
         
         #swap the tiles
