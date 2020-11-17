@@ -194,12 +194,11 @@ class Puzzle:
     
     def moveUpRightWrap(self):
         zero_index = self.matrix.index(0)
-        move_index = -1
-        w = self.width        
+        move_index = -1   
         
-        #if zero is located on down right corner, perform diagonal wrap
-        if zero_index == self.downRightCorner:
-            move_index = zero_index - w - (w - 1)
+        #if zero is located on down left corner, perform diagonal wrap
+        if zero_index == self.downLeftCorner:
+            move_index = self.width - 1
         else:
             print("Can only perform an upward diagonal if zero is located on a bottom corner.")
             return None
@@ -211,12 +210,11 @@ class Puzzle:
         
     def moveUpLeftWrap(self):
         zero_index = self.matrix.index(0)
-        w = self.width
         move_index = -1
         
-        #if zero is on down left corner, perform diagonal wrap
-        if zero_index == self.downLeftCorner:
-            move_index = zero_index - w + (w - 1)
+        #if zero is on down right corner, perform diagonal wrap
+        if zero_index == self.downRightCorner:
+            move_index = 0
         else:
             print("Can only perform a upward diagonal if zero is located on bottom corner")
             return None
@@ -228,12 +226,11 @@ class Puzzle:
         
     def moveDownRightWrap(self):
         zero_index = self.matrix.index(0)
-        move_index = -1
-        w = self.width        
+        move_index = -1 
         
-        #if zero is located on down right corner, perform diagonal wrap
-        if zero_index == self.upRightCorner:
-            move_index = zero_index + w - (w - 1)
+        #if zero is located on up left corner, perform diagonal wrap
+        if zero_index == self.upLeftCorner:
+            move_index = len(self.matrix) - 1
         else:
             print("Can only perform an downward diagonal if zero is located on a top corner.")
             return None
@@ -245,12 +242,11 @@ class Puzzle:
         
     def moveDownLeftWrap(self):
         zero_index = self.matrix.index(0)
-        w = self.width
         move_index = -1
         
-        #if zero is on up left corner, perform diagonal wrap
-        if zero_index == self.upLeftCorner:
-            move_index = zero_index + w + (w - 1)
+        #if zero is on up right corner, perform diagonal wrap
+        if zero_index == self.upRightCorner:
+            move_index = len(self.matrix) - self.width
         else:
             print("Can only perform a downward diagonal if zero is located on top corner")
             return None
