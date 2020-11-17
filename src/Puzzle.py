@@ -16,7 +16,6 @@ class Puzzle:
         self.height = height
         self.width = width
         self.g_cost = g_cost
-        self.h_cost = self.h0()
         self.upLeftCorner = 0
         self.upRightCorner = self.width - 1
         self.downLeftCorner = len(self.matrix) - (self.width)
@@ -259,12 +258,15 @@ class Puzzle:
         return child
     
     """
+    Calculates and Assigns the heuristic h0 
     Returns the puzzle's h0 heuristic
     """
     def h0(self):
         if self.matrix[len(self.matrix) - 1] == 0:
+            self.h_cost = 0
             return 0
         else:
+            self.h_cost = 1
             return 1
     
     def showState(self):
