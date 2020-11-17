@@ -29,7 +29,7 @@ class Puzzle:
         move_index = zero_index - self.width
         
         #swap the tiles
-        if move_index > 0:
+        if move_index >= 0:
             self.__swapNumbers(zero_index, move_index)
         else:
             print("Cannot move up if zero is located on top row")
