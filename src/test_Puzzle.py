@@ -15,7 +15,7 @@ Created on Thu Nov 16
 class TestPuzzle(unittest.TestCase):
     
     def test_moveUp(self):
-        
+        print("\n===================== test_moveUp =====================")
         #============ 3x2 ============#
         
         # 0 1
@@ -73,7 +73,7 @@ class TestPuzzle(unittest.TestCase):
         self.assertEqual(temp.g_cost, 1)
     
     def test_moveDown(self):
-        
+        print("\n===================== test_moveDown =====================")
         #============ 3x2 ============#
         
         # 1 2
@@ -132,7 +132,7 @@ class TestPuzzle(unittest.TestCase):
         self.assertEqual(temp.g_cost, 1)
         
     def test_moveRight(self):
-        
+        print("\n===================== test_moveRight =====================")
         #============ 3x2 ============#
         
         # 1 2
@@ -191,7 +191,7 @@ class TestPuzzle(unittest.TestCase):
         self.assertEqual(temp.g_cost, 1)
         
     def test_moveLeft(self):
-        
+        print("\n===================== test_moveLeft =====================")
         #============ 3x2 ============#
         
         # 1 2
@@ -250,7 +250,7 @@ class TestPuzzle(unittest.TestCase):
         self.assertEqual(temp.g_cost, 1)
         
     def test_moveRightWrap(self):
-        
+        print("\n===================== test_moveRightWrap =====================")
         #============ 3x2 ============#
         
         # 1 2
@@ -329,7 +329,7 @@ class TestPuzzle(unittest.TestCase):
         self.assertEqual(temp.g_cost, 2)
         
     def test_moveLeftWrap(self):
-        
+        print("\n===================== test_moveLeftWrap =====================")
         #============ 3x2 ============#
         
         # 1 2
@@ -408,7 +408,7 @@ class TestPuzzle(unittest.TestCase):
         self.assertEqual(temp.g_cost, 2)
         
     def test_moveUpRight(self):
-        
+        print("\n===================== test_moveUpRight =====================")
         #============ 3x2 ============#
         
         # 1 2
@@ -472,7 +472,7 @@ class TestPuzzle(unittest.TestCase):
         self.assertEqual(temp.g_cost, 3)
         
     def test_moveUpLeft(self):
-        
+        print("\n===================== test_moveUpLeft =====================")
         #============ 3x2 ============#
         
         # 1 2
@@ -536,7 +536,7 @@ class TestPuzzle(unittest.TestCase):
         self.assertEqual(temp.g_cost, 3)
 
     def test_moveDownRight(self):
-        
+        print("\n===================== test_moveDownRight =====================")
         #============ 3x2 ============#
         
         # 1 2
@@ -600,7 +600,7 @@ class TestPuzzle(unittest.TestCase):
         self.assertEqual(temp.g_cost, 3)
     
     def test_moveDownLeft(self):
-        
+        print("\n===================== test_moveDownLeft =====================")
         #============ 3x2 ============#
         
         # 1 2
@@ -664,7 +664,7 @@ class TestPuzzle(unittest.TestCase):
         self.assertEqual(temp.g_cost, 3)
         
     def test_moveUpRightWrap(self):
-        
+        print("\n===================== test_moveUpRightWrap =====================")
         #============ 3x2 ============#
         
         # 1 2
@@ -727,23 +727,23 @@ class TestPuzzle(unittest.TestCase):
         self.assertEqual(temp.matrix, [1,2,0,4,5,6,3,7,8])
         self.assertEqual(temp.g_cost, 3)
     
-    def test_moveUpLefttWrap(self):
-        
+    def test_moveUpLeftWrap(self):
+        print("\n===================== test_moveUpLeftWrap =====================")
         #============ 3x2 ============#
         
         # 1 2
         # 3 0
         # 4 5
         puzzle = Puzzle(3, 2, [1,2,0,3,4,5], 0)
-        temp = puzzle.moveUpRightWrap()
+        temp = puzzle.moveUpLeftWrap()
         self.assertEqual(temp, None)
         
         # 1 2
         # 3 4
-        # 0 5
-        puzzle = Puzzle(3, 2, [1,2,3,4,0,5], 0)
-        temp = puzzle.moveUpRightWrap()
-        self.assertEqual(temp.matrix, [1,0,3,4,2,5])
+        # 5 0
+        puzzle = Puzzle(3, 2, [1,2,3,4,5,0], 0)
+        temp = puzzle.moveUpLeftWrap()
+        self.assertEqual(temp.matrix, [0,2,3,4,5,1])
         self.assertEqual(temp.g_cost, 3)
         
         #============ 2x4 ============#
@@ -751,20 +751,20 @@ class TestPuzzle(unittest.TestCase):
         # 1 5 2 3
         # 4 0 6 7
         puzzle = Puzzle(2, 4, [1,5,2,3,4,0,6,7], 0)
-        temp = puzzle.moveUpRightWrap()
+        temp = puzzle.moveUpLeftWrap()
         self.assertEqual(temp, None)
         
         # 1 2 3 0
         # 4 5 6 7
         puzzle = Puzzle(2, 4, [1,2,3,0,4,5,6,7], 0)
-        temp = puzzle.moveUpRightWrap()
+        temp = puzzle.moveUpLeftWrap()
         self.assertEqual(temp, None)
         
         # 1 2 3 4
-        # 0 5 6 7
-        puzzle = Puzzle(2, 4, [1,2,3,4,0,5,6,7], 0)
-        temp = puzzle.moveUpRightWrap()
-        self.assertEqual(temp.matrix, [1,2,3,0,4,5,6,7])
+        # 5 6 7 0
+        puzzle = Puzzle(2, 4, [1,2,3,4,5,6,7,0], 0)
+        temp = puzzle.moveUpLeftWrap()
+        self.assertEqual(temp.matrix, [0,2,3,4,5,6,7,1])
         self.assertEqual(temp.g_cost, 3)
         
         #============ 3x3 ============#
@@ -773,20 +773,148 @@ class TestPuzzle(unittest.TestCase):
         # 0 4 5
         # 6 7 8
         puzzle = Puzzle(3, 3, [1,2,3,0,4,5,6,7,8], 0)
-        temp = puzzle.moveUpRightWrap()
+        temp = puzzle.moveUpLeftWrap()
         self.assertEqual(temp, None)
         
         # 1 2 3
         # 4 5 0
         # 6 7 8
         puzzle = Puzzle(3, 3, [1,2,3,4,5,0,6,7,8], 0)
-        temp = puzzle.moveUpRightWrap()
+        temp = puzzle.moveUpLeftWrap()
         self.assertEqual(temp, None)
         
         # 1 2 3
         # 4 5 6
-        # 0 7 8
-        puzzle = Puzzle(3, 3, [1,2,3,4,5,6,0,7,8], 0)
-        temp = puzzle.moveUpRightWrap()
-        self.assertEqual(temp.matrix, [1,2,0,4,5,6,3,7,8])
+        # 7 8 0
+        puzzle = Puzzle(3, 3, [1,2,3,4,5,6,7,8,0], 0)
+        temp = puzzle.moveUpLeftWrap()
+        self.assertEqual(temp.matrix, [0,2,3,4,5,6,7,8,1])
+        self.assertEqual(temp.g_cost, 3)
+        
+    def test_moveDownRightWrap(self):
+        print("\n===================== test_moveDownRightWrap =====================")
+        #============ 3x2 ============#
+        
+        # 1 2
+        # 0 3
+        # 4 5
+        puzzle = Puzzle(3, 2, [1,2,0,3,4,5], 0)
+        temp = puzzle.moveDownRightWrap()
+        self.assertEqual(temp, None)
+        
+        # 0 1
+        # 2 3
+        # 4 5
+        puzzle = Puzzle(3, 2, [0,1,2,3,4,5], 0)
+        temp = puzzle.moveDownRightWrap()
+        self.assertEqual(temp.matrix, [5,1,2,3,4,0])
+        self.assertEqual(temp.g_cost, 3)
+        
+        #============ 2x4 ============#
+        
+        # 1 0 2 3
+        # 4 5 6 7
+        puzzle = Puzzle(2, 4, [1,0,2,3,4,5,6,7], 0)
+        temp = puzzle.moveDownRightWrap()
+        self.assertEqual(temp, None)
+        
+        # 1 2 3 0
+        # 4 5 6 7
+        puzzle = Puzzle(2, 4, [1,2,3,0,4,5,6,7], 0)
+        temp = puzzle.moveDownRightWrap()
+        self.assertEqual(temp, None)
+        
+        # 0 1 2 3
+        # 4 5 6 7
+        puzzle = Puzzle(2, 4, [0,1,2,3,4,5,6,7], 0)
+        temp = puzzle.moveDownRightWrap()
+        self.assertEqual(temp.matrix, [7,1,2,3,4,5,6,0])
+        self.assertEqual(temp.g_cost, 3)
+        
+        #============ 3x3 ============#
+        
+        # 1 2 3
+        # 0 4 5
+        # 6 7 8
+        puzzle = Puzzle(3, 3, [1,2,3,0,4,5,6,7,8], 0)
+        temp = puzzle.moveDownRightWrap()
+        self.assertEqual(temp, None)
+        
+        # 1 2 3
+        # 4 5 0
+        # 6 7 8
+        puzzle = Puzzle(3, 3, [1,2,3,4,5,0,6,7,8], 0)
+        temp = puzzle.moveDownRightWrap()
+        self.assertEqual(temp, None)
+        
+        # 0 1 2
+        # 3 4 5
+        # 6 7 8
+        puzzle = Puzzle(3, 3, [0,1,2,3,4,5,6,7,8], 0)
+        temp = puzzle.moveDownRightWrap()
+        self.assertEqual(temp.matrix, [8,1,2,3,4,5,6,7,0])
+        self.assertEqual(temp.g_cost, 3)
+        
+    def test_moveDownLeftWrap(self):
+        print("\n===================== test_moveDownLeftWrap =====================")
+        #============ 3x2 ============#
+        
+        # 1 2
+        # 3 0
+        # 4 5
+        puzzle = Puzzle(3, 2, [1,2,3,0,4,5], 0)
+        temp = puzzle.moveDownLeftWrap()
+        self.assertEqual(temp, None)
+        
+        # 1 0
+        # 2 3
+        # 4 5
+        puzzle = Puzzle(3, 2, [1,0,2,3,4,5], 0)
+        temp = puzzle.moveDownLeftWrap()
+        self.assertEqual(temp.matrix, [1,4,2,3,0,5])
+        self.assertEqual(temp.g_cost, 3)
+        
+        #============ 2x4 ============#
+        
+        # 1 0 2 3
+        # 4 5 6 7
+        puzzle = Puzzle(2, 4, [1,0,2,3,4,5,6,7], 0)
+        temp = puzzle.moveDownLeftWrap()
+        self.assertEqual(temp, None)
+        
+        # 0 1 2 3
+        # 4 5 6 7
+        puzzle = Puzzle(2, 4, [0,1,2,3,4,5,6,7], 0)
+        temp = puzzle.moveDownLeftWrap()
+        self.assertEqual(temp, None)
+        
+        # 1 2 3 0
+        # 4 5 6 7
+        puzzle = Puzzle(2, 4, [1,2,3,0,4,5,6,7], 0)
+        temp = puzzle.moveDownLeftWrap()
+        self.assertEqual(temp.matrix, [1,2,3,4,0,5,6,7])
+        self.assertEqual(temp.g_cost, 3)
+        
+        #============ 3x3 ============#
+        
+        # 1 2 3
+        # 0 4 5
+        # 6 7 8
+        puzzle = Puzzle(3, 3, [1,2,3,0,4,5,6,7,8], 0)
+        temp = puzzle.moveDownLeftWrap()
+        self.assertEqual(temp, None)
+        
+        # 1 2 3
+        # 4 5 0
+        # 6 7 8
+        puzzle = Puzzle(3, 3, [1,2,3,4,5,0,6,7,8], 0)
+        temp = puzzle.moveDownLeftWrap()
+        self.assertEqual(temp, None)
+        
+        # 1 2 0
+        # 3 4 5
+        # 6 7 8
+        puzzle = Puzzle(3, 3, [1,2,0,3,4,5,6,7,8], 0)
+        temp = puzzle.moveDownLeftWrap()
+        self.assertEqual(temp.matrix, [1,2,6,3,4,5,0,7,8])
         self.assertEqual(temp.g_cost, 3)
