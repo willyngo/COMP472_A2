@@ -48,6 +48,10 @@ def find_successors(puzzle):
     if (p is not None): successors.append(p)
     p = puzzle.moveLeftWrap()
     if (p is not None): successors.append(p)
+    p = puzzle.moveUpWrap()
+    if (p is not None): successors.append(p)
+    p = puzzle.moveDownWrap()
+    if (p is not None): successors.append(p)
     p = puzzle.moveUpRight()
     if (p is not None): successors.append(p)
     p = puzzle.moveUpLeft()
@@ -67,25 +71,40 @@ def find_successors(puzzle):
     
     return successors
 
-goal_puzzle1 = []
+"""
+Creates the goal states. 
+Call this once only in the begining.
 
+Return:
+    A tuple of both goal states (2 arrays)
 """
-Checks if the given puzzle 
-"""
-def checkGoal(puzzle):
+def createGoalStates(puzzle):
     length = len(puzzle.matrix)
     width = puzzle.width
     
-    goal = list(range(1, length+1))
-    goal[length-1] = 0
+    # Create 1st goal state
+    goal_puzzle1 = list(range(1, length+1))
+    goal_puzzle1[length-1] = 0
     
-    goal2 = list(range(1, length+1))
+    # Create 2nd goal state
+    goal_puzzle2 = list(range(1, length+1))
     index = 0
     counter = 1
     for i in range(1, length+1):
-        goal2[index] = i
+        goal_puzzle2[index] = i
         index += width
         if index >= length:
             index = 0 + counter
             counter += 1
-    goal2[length-1] = 0
+    goal_puzzle2[length-1] = 0
+    
+    return goal_puzzle1, goal_puzzle2
+
+def checkIfGoalState(puzzle, goal1, goal2):
+    if puzzle.matrix == goal1:
+        return True
+    if puzzle.matrix == goal2:
+        return True
+    
+    return False
+    
