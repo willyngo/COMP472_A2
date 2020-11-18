@@ -25,16 +25,25 @@ class myQueue:
         self.index += 1
         
     """
+    push function implemented for A*
+    """
+    def push_a_star(self, puzzle):
+        heapq.heappush(self._data, 
+                       (puzzle.g_cost + puzzle.h_cost, puzzle.h_cost,
+                        puzzle.g_cost, self.index, puzzle))
+        self.index += 1
+        
+    """
     heapq pop function pops item with lowest cost of the (cost, matrix) tuple
     We remove duplicates as we pop because our calculations showed us a better
     performance compared to removin duplicates in push()
     """
     def pop(self):
-        popped = heapq.heappop(self._data)[2]
+        popped = heapq.heappop(self._data)[len(self._data[0]) - 1]
         
         #loop through the list and check for duplicates and remove them
         for i in range(1, len(self._data)):
-            current = self._data[i][2]
+            current = self._data[i][len(self._data[0]) - 1]
             if (popped == current):
                 self._data.pop(i)
                 
@@ -46,6 +55,6 @@ class myQueue:
     def showQueue(self):
         print("current puzzle configurations in this queue is: ")
         for item in self._data:
-            print(item[0], ": ", item[2].matrix)
+            print(item[0], ": ", item[len(item) - 1].matrix)
         
         print("=================================================")
