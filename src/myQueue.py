@@ -23,6 +23,14 @@ class myQueue:
         cost = puzzle.g_cost
         heapq.heappush(self._data, (cost, self.index, puzzle))
         self.index += 1
+    
+    """
+    Push function that sorts by h(n) for Greedy Best First Search
+    """
+    def push_sort_gbfs(self, puzzle):
+        h_cost = puzzle.h_cost
+        heapq.heappush(self._data, (h_cost, self.index, puzzle))
+        self.index += 1
         
     """
     push function implemented for A*

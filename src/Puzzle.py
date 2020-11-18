@@ -353,6 +353,54 @@ class Puzzle:
         else:
             self.h_cost = 1
             return 1
-    
+        
+    """
+    Heuristic h2: by finding the distance from 
+    correct index like sum of permutation inversion 
+    except it can wrap from index 0 to last index of list
+    """
+    def h2(self, goal1, goal2):
+        
+        goal1_h2_n = 0
+        goal2_h2_n = 0
+        puzz_len = len(self.matrix)
+        midpoint = len(self.matrix) / 2
+        
+        # calc for both goal1 and goal2
+        for i in range(puzz_len):
+            g1_correct_index = goal1.index(self.matrix[i])
+            g2_correct_index = goal2.index(self.matrix[i])
+            
+            g1_distance = g1_correct_index - i
+            g2_distance = g2_correct_index - i
+            
+            # calc distance for goal1
+            if abs(g1_distance) >= midpoint:
+                # if it's too far, wrap other way
+                if g1_distance > 0:
+                    g1_distance = i + (puzz_len - g1_correct_index)
+                else:
+                    g1_distance = g1_correct_index + (puzz_len - i)
+            else:
+                g1_distance = abs(g1_distance)
+                
+            # calc distance for goal2
+            if abs(g2_distance) >= midpoint:
+                # if it's too far, wrap other way
+                if g2_distance > 0:
+                    g2_distance = i + (puzz_len - g2_correct_index)
+                else:
+                    g2_distance = g2_correct_index + (puzz_len - i)
+            else:
+                g2_distance = abs(g2_distance)
+                
+            goal1_h2_n += g1_distance
+            goal2_h2_n += g2_distance
+        
+        h2_n = min(goal1_h2_n, goal2_h2_n)
+        
+        self.h_cost = h2_n
+        return h2_n
+                
     def showState(self):
         print(self.matrix)
