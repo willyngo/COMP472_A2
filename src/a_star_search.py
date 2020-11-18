@@ -143,8 +143,10 @@ def run(heuristic):
         else:
             util.output_no_solution(i, "astar", "h"+str(heuristic))
 
+# Run for 1st heuristic
+run(1)
+run_50(1)
+
+# Run for 2nd heuristic
 run(2)
 run_50(2)
-# p = Puzzle(2,4,puzzle_arr[1],0,None)
-# goal1, goal2 = util.createGoalStates(p)
-# run_a_star(p,goal1,goal2,2)

@@ -107,5 +107,5 @@ def run():
         else:
             util.output_no_solution(i, algorithm_name)
             
-# run()
+run()
 run_50() 

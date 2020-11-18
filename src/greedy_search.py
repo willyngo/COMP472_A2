@@ -121,5 +121,10 @@ def run(heuristic):
         else:
             util.output_no_solution(i, "gbfs", "h"+str(heuristic))
 
+# Run for 1st heuristic
 run(1)
 run_50(1)
+
+# Run for 2nd heuristic
+run(2)
+run_50(2)
