@@ -26,11 +26,13 @@ class myQueue:
         
     """
     heapq pop function pops item with lowest cost of the (cost, matrix) tuple
+    We remove duplicates as we pop because our calculations showed us a better
+    performance compared to removin duplicates in push()
     """
     def pop(self):
         popped = heapq.heappop(self._data)[2]
         
-        #loop through the list and check for duplicates
+        #loop through the list and check for duplicates and remove them
         for i in range(1, len(self._data)):
             current = self._data[i][2]
             if (popped == current):
