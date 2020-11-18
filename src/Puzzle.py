@@ -16,6 +16,7 @@ class Puzzle:
         self.height = height
         self.width = width
         self.g_cost = g_cost
+        self.h_cost = 0
         self.upLeftCorner = 0
         self.upRightCorner = self.width - 1
         self.downLeftCorner = len(self.matrix) - (self.width)
