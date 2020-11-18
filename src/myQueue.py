@@ -23,6 +23,23 @@ class myQueue:
         cost = puzzle.g_cost
         heapq.heappush(self._data, (cost, self.index, puzzle))
         self.index += 1
+    
+    """
+    Push function that sorts by h(n) for Greedy Best First Search
+    """
+    def push_sort_gbfs(self, puzzle):
+        h_cost = puzzle.h_cost
+        heapq.heappush(self._data, (h_cost, self.index, puzzle))
+        self.index += 1
+        
+    """
+    push function implemented for A*
+    """
+    def push_a_star(self, puzzle):
+        heapq.heappush(self._data, 
+                       (puzzle.g_cost + puzzle.h_cost, puzzle.h_cost,
+                        puzzle.g_cost, self.index, puzzle))
+        self.index += 1
         
     """
     heapq pop function pops item with lowest cost of the (cost, matrix) tuple
@@ -30,13 +47,17 @@ class myQueue:
     performance compared to removin duplicates in push()
     """
     def pop(self):
-        popped = heapq.heappop(self._data)[2]
+        puzzleIndex = len(self._data[0]) - 1
+        popped = heapq.heappop(self._data)[puzzleIndex]
         
         #loop through the list and check for duplicates and remove them
-        for i in range(1, len(self._data)):
-            current = self._data[i][2]
-            if (popped == current):
-                self._data.pop(i)
+        if len(self._data) >= 1:
+            for i in range(len(self._data) - 1, -1, -1):
+                current = self._data[i][puzzleIndex]
+                if (popped == current):
+                    del self._data[i]
+                    # i = i - 1
+
                 
         return popped
                    
@@ -46,6 +67,6 @@ class myQueue:
     def showQueue(self):
         print("current puzzle configurations in this queue is: ")
         for item in self._data:
-            print(item[0], ": ", item[2].matrix)
+            print(item[0], ": ", item[len(item) - 1].matrix)
         
         print("=================================================")

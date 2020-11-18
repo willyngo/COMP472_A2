@@ -1,58 +1,70 @@
 # -*- coding: utf-8 -*-
 import util
+import time
 from Puzzle import Puzzle
-
-try: import operator
-except ImportError: keyfun = lambda x: x.h_cost
-else: keyfun = operator.attrgetter("h_cost")
+from myQueue import myQueue
 
 puzzle_arr = util.read_puzzle() #puzzle_arr contains all the initial puzzle in a list
+puzzle = Puzzle(2, 4, puzzle_arr[0], 0, None)
+goal1, goal2 = util.createGoalStates(puzzle)
 
 
-def run_with_h0(puzzle):
+def __remove_if_in_closed(success_list, closed_list):
+    return [item for item in success_list if item not in closed_list]
+
+def run_with_h0(root):
     
     # init vars
-    open_list = []
+    open_list = myQueue()
     closed_list = []
-    reach_goal = False;
+    reach_goal = False
+    time_start = time.time()
+    time_limit = time_start + 60
     
-    # get h(n) of root and add it to closed list
-    puzzle.h0()
-    closed_list.insert(0, puzzle)
+    # get h(n) of root and add it to open list
+    root.h2(goal1, goal2)
+    open_list.push_sort_gbfs(root)
     
     while not reach_goal:
+        if time.time() > time_limit:
+            break
+        
+        currentNode = open_list.pop()
+        closed_list.append(currentNode)
+        
+        if util.checkIfGoalState(currentNode, goal1, goal2):
+            reach_goal = True
+            break
+        
         # find successors
-        currentNode = closed_list[0]
-        successors = util.find_successors(puzzle)
-        # find best successor
-        lowestCost = float("inf")
-        bestSucessor = None
+        successors = util.find_successors(currentNode)
+        successors = __remove_if_in_closed(successors, closed_list)
         
+        # find best successor if have any
         for s in successors:
-            s.h0()
-            
-            # check for dups in open list
-            for p in open_list:
-                if (s == p and s.h_cost < p.h_cost):
-                    open_list.remove(p)
-            open_list.append(s)
-            
-            # find lowest h(n)
-            if (s.h_cost < lowestCost):
-                bestSuccessor = s
-                lowestCost = s.h_cost
-                
-        if lowestCost >= closed_list[0].h_cost:
-            
-        
-        
-    # add to list
+            s.h2(goal1, goal2)
+            # our priority queue will sort by h(n) and remove duplicates
+            open_list.push_sort_gbfs(s)
+           
+        # see if successor has lower h(n) than current node
+        if open_list._data:
+            bestSuccessor = open_list.pop()
+                    
+            if bestSuccessor.h_cost < currentNode.h_cost:
+                closed_list.insert(0, bestSuccessor)
+            else:
+                reach_goal = True  # nothing can beat current node
+        else:
+            # no solution if open list is empty and goal is not reached
+            break
     
-    # sort by h_cost
-    #successors.sort(key=keyfun, reverse=True)
-    
-    for s in successors:
-        print(s.showState())
+    if not reach_goal:
+        print("No solution found with GBFS")
+    else:
+        # find solution path
+        for i in range(len(closed_list)):
+            print(closed_list[i].showState())
+        
 
 # end func
 
@@ -62,5 +74,5 @@ def run_gbfs(puzzle):
     run_with_h0(puzzle)
     
 
-puzzle = Puzzle(2, 4, puzzle_arr[0], 0)
+
 run_with_h0(puzzle)
