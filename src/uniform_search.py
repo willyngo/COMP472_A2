@@ -7,6 +7,8 @@ Created on Thu Nov 12 15:36:04 2020
 from Puzzle import Puzzle
 import util
 from myQueue import myQueue
+import os.path
+import glob
 
 open_list = myQueue()
 closed_list = []
@@ -57,7 +59,9 @@ def run_uniform_search():
                 open_list.push_sort_uniform(state)
                 
     return closed_list
+
+def output_search_list(search_list):
     
 search_list = run_uniform_search()
 for state in search_list:
-    print(state.matrix)
+    print(state.moveTile, " ", state.moveCost, " ", state.matrix)
