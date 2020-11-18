@@ -38,9 +38,9 @@ class Puzzle:
         
         #swap the tiles
         if move_index >= 0:
-            self.moveTile = self.matrix[move_index]
-            self.moveCost = 1
             child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 1, self)
+            child.moveTile = self.matrix[move_index]
+            child.moveCost = 1
             child.__swapNumbers(zero_index, move_index)
             return child
         else:
@@ -53,9 +53,9 @@ class Puzzle:
         
         #swap the tiles
         if move_index < len(self.matrix):
-            self.moveTile = self.matrix[move_index]
-            self.moveCost = 1
             child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 1, self)
+            child.moveTile = self.matrix[move_index]
+            child.moveCost = 1
             child.__swapNumbers(zero_index, move_index)
             return child
         else:
@@ -72,9 +72,9 @@ class Puzzle:
             return None
 
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 1
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 1, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 1
         child.__swapNumbers(zero_index, move_index)
         return child
         
@@ -88,9 +88,9 @@ class Puzzle:
             return None
         
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 1
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 1, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 1
         child.__swapNumbers(zero_index, move_index)
         return child
     
@@ -110,9 +110,9 @@ class Puzzle:
             return None
         
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 2
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 2, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 2
         child.__swapNumbers(zero_index, move_index)
         return child
     
@@ -130,9 +130,9 @@ class Puzzle:
             return None
         
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 2
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 2, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 2
         child.__swapNumbers(zero_index, move_index)
         return child
     
@@ -155,9 +155,9 @@ class Puzzle:
             return None
         
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 2
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 2, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 2
         child.__swapNumbers(zero_index, move_index)
         return child
     
@@ -180,9 +180,9 @@ class Puzzle:
             return None
         
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 2
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 2, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 2
         child.__swapNumbers(zero_index, move_index)
         return child
     
@@ -202,9 +202,9 @@ class Puzzle:
             return None
             
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 3
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 3, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 3
         child.__swapNumbers(zero_index, move_index)
         return child
         
@@ -221,9 +221,9 @@ class Puzzle:
             return None
         
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 3
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 3, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 3
         child.__swapNumbers(zero_index, move_index)
         return child
         
@@ -240,9 +240,9 @@ class Puzzle:
             return None
             
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 3
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 3, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 3
         child.__swapNumbers(zero_index, move_index)
         return child
         
@@ -259,9 +259,9 @@ class Puzzle:
             return None
         
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 3
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 3, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 3
         child.__swapNumbers(zero_index, move_index)
         return child
         
@@ -279,9 +279,9 @@ class Puzzle:
             return None
             
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 3
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 3, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 3
         child.__swapNumbers(zero_index, move_index)
         return child
         
@@ -297,9 +297,9 @@ class Puzzle:
             return None
         
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 3
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 3, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 3
         child.__swapNumbers(zero_index, move_index)
         return child
         
@@ -315,9 +315,9 @@ class Puzzle:
             return None
             
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 3
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 3, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 3
         child.__swapNumbers(zero_index, move_index)
         return child
         
@@ -333,9 +333,9 @@ class Puzzle:
             return None
         
         #swap the tiles
-        self.moveTile = self.matrix[move_index]
-        self.moveCost = 3
         child = Puzzle(self.height, self.width, self.matrix, self.g_cost + 3, self)
+        child.moveTile = self.matrix[move_index]
+        child.moveCost = 3
         child.__swapNumbers(zero_index, move_index)
         return child
     
