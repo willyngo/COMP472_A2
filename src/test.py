@@ -35,19 +35,26 @@ p5 = Puzzle(2, 4, [2,4,5,6,7,8,9,8], 2)
 p6 = Puzzle(2, 4, [3,3,3,4,5,6,7,8], 0)
 p7 = Puzzle(2, 4, [3,3,3,4,5,6,7,8], 4)
 
-open_list= myQueue()
+# open_list= myQueue()
 
-open_list.push_sort_uniform(p7)
-open_list.push_sort_uniform(p4)
-open_list.push_sort_uniform(p5)
-open_list.push_sort_uniform(p6)
+# open_list.push_sort_uniform(p7)
+# open_list.push_sort_uniform(p4)
+# open_list.push_sort_uniform(p5)
+# open_list.push_sort_uniform(p6)
 
-popped = open_list.pop()
-print("popped: ", popped.matrix)
-open_list.showQueue()
+# popped = open_list.pop()
+# print("popped: ", popped.matrix)
+# open_list.showQueue()
 
+# closed_list = [p1,p2,p3,p4]
+# successor = [p5,p6,p1]
 
+# print(closed_list[0] == successor[2])
 
+# n = [item for item in successor if item not in closed_list]
+
+for i in range(10, -1, -1):
+    print(i)
     
     
 

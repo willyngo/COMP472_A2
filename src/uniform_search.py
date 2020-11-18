@@ -7,6 +7,8 @@ Created on Thu Nov 12 15:36:04 2020
 from Puzzle import Puzzle
 import util
 from myQueue import myQueue
+import os.path
+import glob
 
 open_list = myQueue()
 closed_list = []
@@ -25,21 +27,13 @@ p3_goal_state_1, p3_goal_state_2 = util.createGoalStates(initial_puzzle_3)
 #current puzzle to solve, change value as needed
 current_puzzle = initial_puzzle_1
 
-def __remove_if_in_closed(success_list):
-    new_success_list = []
-    
-    for success_list_item in success_list:
-        for closed_item in closed_list:
-            if not (success_list_item.matrix == closed_item.matrix):
-                new_success_list.append(success_list_item)
-                
-    return new_success_list
+def __remove_if_in_closed(success_list):                
+    return [item for item in success_list if item not in closed_list]
 
-        
     
 def run_uniform_search():
     #add root to open list
-    open_list.push(current_puzzle)
+    open_list.push_sort_uniform(current_puzzle)
     foundGoalState = False
     
     while not foundGoalState:
@@ -50,6 +44,7 @@ def run_uniform_search():
         if util.checkIfGoalState(current_state, p1_goal_state_1, p1_goal_state_2):
             foundGoalState = True
             break
+        
         #else check the successors
         closed_list.append(current_state)
         successors = util.find_successors(current_state)
@@ -61,14 +56,12 @@ def run_uniform_search():
             
             #add successor to open list
             for state in successors:
-                open_list.push(state)
+                open_list.push_sort_uniform(state)
                 
-            #check if a successor state already appears in the open_list
-            # if it does appear, retain the one with the lowest cost
-            
-            
     return closed_list
+
+def output_search_list(search_list):
     
 search_list = run_uniform_search()
 for state in search_list:
-    print(state.matrix)
+    print(state.moveTile, " ", state.moveCost, " ", state.matrix)

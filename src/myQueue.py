@@ -47,13 +47,17 @@ class myQueue:
     performance compared to removin duplicates in push()
     """
     def pop(self):
-        popped = heapq.heappop(self._data)[len(self._data[0]) - 1]
+        puzzleIndex = len(self._data[0]) - 1
+        popped = heapq.heappop(self._data)[puzzleIndex]
         
         #loop through the list and check for duplicates and remove them
-        for i in range(1, len(self._data)):
-            current = self._data[i][len(self._data[0]) - 1]
-            if (popped == current):
-                self._data.pop(i)
+        if len(self._data) >= 1:
+            for i in range(len(self._data) - 1, -1, -1):
+                current = self._data[i][puzzleIndex]
+                if (popped == current):
+                    del self._data[i]
+                    # i = i - 1
+
                 
         return popped
                    
