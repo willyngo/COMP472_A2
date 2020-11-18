@@ -9,6 +9,10 @@ from Puzzle import Puzzle
 import util
 from myQueue import myQueue
 import heapq
+import os.path
+import time
+import random
+
 
 def __remove_if_in_closed(success_list, closed_list):
     new_success_list = []
@@ -20,20 +24,34 @@ def __remove_if_in_closed(success_list, closed_list):
                 
     return new_success_list
 
-puzzle_arr = util.read_puzzle()
-puzzle_1 = puzzle_arr[0]
-puzzle_2 = [0,1,2,3,4,5,6,7,8] #3x3
-puzzle_3 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17] #3x6
+# puzzle_arr = util.read_puzzle()
+# puzzle_1 = puzzle_arr[0]
+# puzzle_2 = [0,1,2,3,4,5,6,7,8] #3x3
+# puzzle_3 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17] #3x6
 
-p1 = Puzzle(2, 4, puzzle_1, 3)
-p2 = Puzzle(2, 4, puzzle_arr[1], 2)
-p3 = Puzzle(2, 4, puzzle_arr[2], 2)
+# p1 = Puzzle(2, 4, puzzle_1, 3)
+# p2 = Puzzle(2, 4, puzzle_arr[1], 2)
+# p3 = Puzzle(2, 4, puzzle_arr[2], 2)
 
-p4 = Puzzle(2, 4, [1,2,3,4,5,6,7,8], 4)
-p5 = Puzzle(2, 4, [2,4,5,6,7,8,9,8], 2)
+# p4 = Puzzle(2, 4, [1,2,3,4,5,6,7,8], 4)
+# p5 = Puzzle(2, 4, [2,4,5,6,7,8,9,8], 2)
 
-p6 = Puzzle(2, 4, [3,3,3,4,5,6,7,8], 0)
-p7 = Puzzle(2, 4, [3,3,3,4,5,6,7,8], 4)
+# p6 = Puzzle(2, 4, [3,3,3,4,5,6,7,8], 0)
+# p7 = Puzzle(2, 4, [3,3,3,4,5,6,7,8], 4)
+
+random_puzzles = []
+for i in range(50):
+    random_list = random.sample(range(8), 8)
+    random_puzzles.append(random_list)
+    
+for p in random_puzzles:
+    with open("../puzzles/50_random_puzzle.txt", "a") as p_file:
+        line = ""
+        for i in p:
+            line += str(i) + " "
+        line += "\n"
+        p_file.write(line)
+    
 
 # open_list= myQueue()
 
@@ -52,11 +70,16 @@ p7 = Puzzle(2, 4, [3,3,3,4,5,6,7,8], 4)
 # print(closed_list[0] == successor[2])
 
 # n = [item for item in successor if item not in closed_list]
+# search_list = ["hello ", "how are you ", "yes "]
 
-for i in range(10, -1, -1):
-    print(i)
+#     #output block into a new file
+# with open("../outputs/ucs_search.txt", "w") as output_file:
+#     #new_block_file.write(json.dumps(spimi_index))
+#     for result in search_list:
+#         result = result + str(2) + "\n"
+#         output_file.write(result)
     
-    
+
 
 
 # q = myQueue()
