@@ -10,5 +10,5 @@ avg no solutions: 0.0
 total cost: 792
 avg cost: 15.84
 
-total execution time: 11.141281127929688
-avg execution time: 0.22282562255859376
+total execution time: 11.411869764328003
+avg execution time: 0.22823739528656006
