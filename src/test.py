@@ -38,8 +38,8 @@ def __remove_if_in_closed(success_list, closed_list):
 # p7 = Puzzle(2, 4, [3,3,3,4,5,6,7,8], 4)
 
 
-for i in range(3):
-    print(i)
+n = [1,2,3,4]
+print(len(n) - 1)
     
 # open_list= myQueue()
 
