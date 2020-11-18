@@ -2,7 +2,7 @@
 """
 Created on Thu Nov 12 15:36:04 2020
 
-@author: NgoWi
+@author: William Ngo
 """
 from Puzzle import Puzzle
 import util
@@ -142,7 +142,7 @@ def run():
         search_list, found, time_taken  = run_uniform_search(initial_puzzle, goal_state_1, goal_state_2)
        
         if found:
-            solution_list = create_solution_list(search_list[-1], time_taken)
+            solution_list = create_solution_list(search_list[-1])
             solution_cost = search_list[-1].g_cost
         
             output_solution_list(solution_list, i, time_taken, solution_cost)
