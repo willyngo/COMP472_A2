@@ -64,53 +64,6 @@ def run_uniform_search(current_puzzle, goal_state_1, goal_state_2):
                 open_list.push_sort_uniform(state)
                 
     return closed_list, foundGoalState, (time.time() - time_start)
-
-def create_solution_list(goal_puzzle):
-    #new_block_file.write(json.dumps(spimi_index))
-    backToRoot = False
-    current = goal_puzzle  
-    solution_list = []
-    
-    while not backToRoot:
-        str_out = str(current.moveTile) + " " + str(current.moveCost) + " " + str(current.matrix) + "\n"
-        solution_list.append(str_out)
-        # output_file.write(str_out)
-        
-        #go to parent
-        parent = current.parent
-        
-        #if reached root, stop
-        if not parent:
-            backToRoot = True
-            break
-        #else check the parent
-        current = parent
-        
-    return solution_list
-
-def output_search_list(search_list, puzzle_num):
-    #output block into a new file
-    with open(f"../outputs/{puzzle_num}_ucs_search.txt", "w") as output_file:
-        #new_block_file.write(json.dumps(spimi_index))
-        for result in search_list:
-            str_out = str(0) + " " + str(result.moveCost) + " " + str(0) + " " + str(result.matrix) + "\n"
-            output_file.write(str_out)
-
-def output_solution_list(solution_list, puzzle_num, time_taken, solution_cost):
-    with open(f"../outputs/{puzzle_num}_ucs_solution.txt", "w") as output_file:     
-        #write down time and total cost
-        r_solution_list = solution_list[::-1]
-        for line in r_solution_list:
-            output_file.write(line)
-        output_file.write("Total cost: " + str(solution_cost) + "\n")
-        output_file.write("Execution time: " + str(time_taken))
-        
-def output_no_solution(puzzle_num):
-    with open(f"../outputs/{puzzle_num}_ucs_solution.txt", "w") as sol_file:
-        sol_file.write("NO SOLUTION")
-        
-    with open(f"../outputs/{puzzle_num}_ucs_search.txt", "w") as output_file:
-        output_file.write("NO SOLUTION")
             
 def run_50():
     total_solution_path = 0
@@ -138,19 +91,21 @@ def run_50():
             
 def run():
     algorithm_name = "ucs"
+    
     for i in range(3):
         initial_puzzle = Puzzle(2, 4, initial_states[i], 0, None)
         goal_state_1, goal_state_2 = util.createGoalStates(initial_puzzle)
         
         search_list, found, time_taken  = run_uniform_search(initial_puzzle, goal_state_1, goal_state_2)
-       
         if found:
-            solution_list = create_solution_list(search_list[-1])
-            solution_cost = search_list[-1].g_cost
+            goal_puzzle = search_list[-1]
+            solution_list = util.create_solution_list(goal_puzzle)
+            solution_cost = goal_puzzle.g_cost
             
             util.output_solution_list(solution_list, i, time_taken, solution_cost, algorithm_name)
             util.output_search_list(search_list, i, algorithm_name)
         else:
             util.output_no_solution(i, algorithm_name)
             
-run()    
+# run()
+run_50() 
