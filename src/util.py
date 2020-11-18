@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 puzzle_filepath = "../puzzles/initial_puzzle.txt"
-
+puzzle_50_filepath = "../puzzles/50_random_puzzles.txt"
 """
 This function reads the filepath containing the input file and returns
 a list containing each line of the input file as an array of ints
@@ -8,11 +8,34 @@ a list containing each line of the input file as an array of ints
 Created on Thu Nov 12
 @author: WilliamNgo, ShifatKhan, Tahn
 """
+
+import random
+
 def read_puzzle():
     puzzle_arr = []
     
     try:    
         with open(puzzle_filepath, 'r') as puzzlefile:
+            for line in puzzlefile:
+                #splits each int into a list but split() returns a list of str
+                split_list = line.split()
+                
+                #turn the str content into a list of ints
+                int_list = list(map(int, split_list))
+                
+                #append each line(puzzle) to the puzzle_array
+                #so that we have an array containing all our puzzles
+                puzzle_arr.append(int_list)
+    except FileNotFoundError:
+        print(f"File not found: {puzzle_filepath}")
+    
+    return puzzle_arr
+
+def read_50_puzzles():
+    puzzle_arr = []
+    
+    try:    
+        with open(puzzle_50_filepath, 'r') as puzzlefile:
             for line in puzzlefile:
                 #splits each int into a list but split() returns a list of str
                 split_list = line.split()
@@ -107,4 +130,3 @@ def checkIfGoalState(puzzle, goal1, goal2):
         return True
     
     return False
-    

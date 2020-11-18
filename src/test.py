@@ -11,6 +11,8 @@ from myQueue import myQueue
 import heapq
 import os.path
 import time
+import random
+
 
 def __remove_if_in_closed(success_list, closed_list):
     new_success_list = []
@@ -37,10 +39,20 @@ def __remove_if_in_closed(success_list, closed_list):
 # p6 = Puzzle(2, 4, [3,3,3,4,5,6,7,8], 0)
 # p7 = Puzzle(2, 4, [3,3,3,4,5,6,7,8], 4)
 
-
-n = [1,2,3,4]
-print(len(n) - 1)
+random_puzzles = []
+for i in range(50):
+    random_list = random.sample(range(8), 8)
+    random_puzzles.append(random_list)
     
+for p in random_puzzles:
+    with open("../puzzles/50_random_puzzle.txt", "a") as p_file:
+        line = ""
+        for i in p:
+            line += str(i) + " "
+        line += "\n"
+        p_file.write(line)
+    
+
 # open_list= myQueue()
 
 # open_list.push_sort_uniform(p7)
