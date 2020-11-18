@@ -19,7 +19,7 @@ def run_with_h0(puzzle):
     reach_goal = False
     
     # get h(n) of root and add it to closed list
-    puzzle.h2(goal1, goal2)
+    puzzle.h1(goal1, goal2)
     closed_list.insert(0, puzzle)
     
     while not reach_goal:
@@ -35,7 +35,7 @@ def run_with_h0(puzzle):
             
             # find best successor if have any
             for s in successors:
-                s.h2(goal1, goal2)
+                s.h1(goal1, goal2)
                 # our priority queue will sort by h(n) and remove duplicates
                 open_list.push_sort_gbfs(s)
                
