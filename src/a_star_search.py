@@ -10,19 +10,24 @@ from Puzzle import Puzzle
 
 puzzle_arr = util.read_puzzle()
 
-p4 = Puzzle(2, 4, [1,2,3,4,5,6,7,8], 4)
-p5 = Puzzle(2, 4, [2,4,5,6,7,8,9,8], 2)
+puzzle1 = Puzzle(2, 4, puzzle_arr[0], 0)
+puzzle1.h0()
+goal1, goal2 = util.createGoalStates(puzzle1)
 
-p6 = Puzzle(2, 4, [3,3,3,4,5,6,7,8], 4)
-p7 = Puzzle(2, 4, [3,3,3,4,5,6,7,8], 4)
+# Create open and closed lists
+open_list = myQueue()
+open_list.push_a_star(puzzle1)
+closed_list = []
 
-open_list= myQueue()
-
-open_list.push_a_star(p7)
-open_list.push_a_star(p4)
-open_list.push_a_star(p5)
-open_list.push_a_star(p6)
-
-popped = open_list.pop()
-print("popped: ", popped.matrix)
-open_list.showQueue()
+goalReached = False
+while not goalReached:
+    currentPuzzle = open_list.pop()
+    
+    if util.checkIfGoalState(puzzle1, goal1, goal2):
+        goalReached = True
+    else:
+        closed_list.append(currentPuzzle)
+        successors = util.find_successors(currentPuzzle)
+        
+        for p in successors:
+            if 
