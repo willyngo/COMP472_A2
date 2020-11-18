@@ -4,7 +4,7 @@ from Puzzle import Puzzle
 from myQueue import myQueue
 
 puzzle_arr = util.read_puzzle() #puzzle_arr contains all the initial puzzle in a list
-puzzle = Puzzle(2, 4, puzzle_arr[0], 0)
+puzzle = Puzzle(2, 4, puzzle_arr[0], 0, None)
 goal1, goal2 = util.createGoalStates(puzzle)
 
 
