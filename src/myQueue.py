@@ -44,10 +44,11 @@ class myQueue:
         
         #loop through the list and check for duplicates and remove them
         if len(self._data) >= 1:
-            for i in range(1, len(self._data)):
+            for i in range(len(self._data) - 1, -1, -1):
                 current = self._data[i][puzzleIndex]
                 if (popped == current):
-                    self._data.pop(i)
+                    del self._data[i]
+                    # i = i - 1
 
                 
         return popped

@@ -46,15 +46,15 @@ p7 = Puzzle(2, 4, [3,3,3,4,5,6,7,8], 4)
 # print("popped: ", popped.matrix)
 # open_list.showQueue()
 
-closed_list = [p1,p2,p3,p4]
-successor = [p5,p6,p1]
+# closed_list = [p1,p2,p3,p4]
+# successor = [p5,p6,p1]
 
-print(closed_list[0] == successor[2])
+# print(closed_list[0] == successor[2])
 
-n = [item for item in successor if item not in closed_list]
+# n = [item for item in successor if item not in closed_list]
 
-for each in n:
-    print(each.matrix)
+for i in range(10, -1, -1):
+    print(i)
     
     
 
