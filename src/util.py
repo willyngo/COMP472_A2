@@ -83,37 +83,37 @@ def create_solution_list(goal_puzzle):
 """
 Output the solution path to a file.
 """
-def output_solution_list(solution_list, puzzle_num, time_taken, solution_cost, algorithmName):
-    with open(f"../outputs/{puzzle_num}_{algorithmName}_solution.txt", "w") as output_file:     
+def output_solution_list(solution_list, puzzle_num, time_taken, solution_cost, algorithmName, h = ""):
+    with open(f"../outputs/{puzzle_num}_{algorithmName}-{h}_solution.txt", "w") as output_file:     
         #write down time and total cost
         for puzzle in solution_list:
             output_file.write(f"{puzzle.moveTile} {puzzle.moveCost} {puzzle.matrix}\n")
         output_file.write("Total cost: " + str(solution_cost) + "\n")
         output_file.write("Execution time: " + str(time_taken))
 
-def output_search_list(search_list, puzzle_num, algorithmName):
+def output_search_list(search_list, puzzle_num, algorithmName, h = ""):
     #output block into a new file
-    with open(f"../outputs/{puzzle_num}_{algorithmName}_search.txt", "w") as output_file:
+    with open(f"../outputs/{puzzle_num}_{algorithmName}-{h}_search.txt", "w") as output_file:
         #new_block_file.write(json.dumps(spimi_index))
         for result in search_list:
             str_out = str(result.g_cost + result.h_cost) + " " + str(result.g_cost) + " " + str(result.h_cost) + " " + str(result.matrix) + "\n"
             output_file.write(str_out)
 
-def output_no_solution(puzzle_num, algorithmName):
-    with open(f"../outputs/{puzzle_num}_{algorithmName}_solution.txt", "w") as sol_file:
+def output_no_solution(puzzle_num, algorithmName, h = ""):
+    with open(f"../outputs/{puzzle_num}_{algorithmName}-{h}_solution.txt", "w") as sol_file:
         sol_file.write("NO SOLUTION")
         
-    with open(f"../outputs/{puzzle_num}_{algorithmName}_search.txt", "w") as output_file:
+    with open(f"../outputs/{puzzle_num}_{algorithmName}-{h}_search.txt", "w") as output_file:
         output_file.write("NO SOLUTION")
 
-def output_analysis_50(total_solution_path, total_search_path, total_number_no_solution, total_cost, total_time, algorithmName):
+def output_analysis_50(total_solution_path, total_search_path, total_number_no_solution, total_cost, total_time, algorithmName, h = ""):
     avg_solution_path = total_solution_path / 50
     avg_search_path = total_search_path / 50
     avg_number_no_solution = total_number_no_solution / 50
     avg_cost = total_cost / 50
     avg_time = total_time / 50
     
-    with open(f"../outputs/{algorithmName}_analysis_50.txt", "w") as output_file:
+    with open(f"../outputs/{algorithmName}-{h}_analysis_50.txt", "w") as output_file:
         output_file.write("total solution length: " + str(total_solution_path) + "\n")
         output_file.write("avg solution length: " + str(avg_solution_path) + "\n\n")
         
