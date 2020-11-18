@@ -353,6 +353,54 @@ class Puzzle:
         else:
             self.h_cost = 1
             return 1
+    
+    """
+    Heuristic h1: by finding the distance from 
+    correct index like Manhattan distance except we can 
+    move diagonally
+    """
+    def h1(self, goal1, goal2):
+        
+        w = self.width
+        goal1_h1_n = 0
+        goal2_h1_n = 0
+        g1_distance = 0
+        g2_distance = 0
+        
+        # calc for both goal1 and goal2
+        for i in range(len(self.matrix)):
+            g1_correct_index = goal1.index(self.matrix[i])
+            g2_correct_index = goal2.index(self.matrix[i])
+            
+            # find rows & cols of i and its correct index
+            i_row = int(i / w) + 1
+            i_col = (i % w) + 1
+            g1_corr_row = int(g1_correct_index / w) + 1
+            g1_corr_col = (g1_correct_index % w) + 1
+            g2_corr_row = int(g2_correct_index / w) + 1
+            g2_corr_col = (g2_correct_index % w) + 1
+            
+            # calc distance between i and correct by rows/cols
+            g1_row_dist = abs(g1_corr_row - i_row)
+            g1_col_dist = abs(g1_corr_col - i_col)
+            g2_row_dist = abs(g2_corr_row - i_row)
+            g2_col_dist = abs(g2_corr_col - i_col)
+            
+            # do math calc to find number of moves to reach correct index
+            diagonal_moves = min(g1_row_dist, g1_col_dist)
+            adjacent_moves = max(g1_row_dist, g1_col_dist) - diagonal_moves
+            g1_distance = diagonal_moves + adjacent_moves
+            diagonal_moves = min(g2_row_dist, g2_col_dist)
+            adjacent_moves = max(g2_row_dist, g2_col_dist) - diagonal_moves
+            g2_distance = diagonal_moves + adjacent_moves
+            
+            goal1_h1_n += g1_distance
+            goal2_h1_n += g2_distance
+            
+        h1_n = min(goal1_h1_n, goal2_h1_n)
+        
+        self.h_cost = h1_n
+        return h1_n
         
     """
     Heuristic h2: by finding the distance from 

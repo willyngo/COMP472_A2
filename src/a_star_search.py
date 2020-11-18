@@ -13,15 +13,6 @@ from Puzzle import Puzzle
 puzzle_arr = util.read_puzzle()
 puzzle_50 = util.read_50_puzzles()
 
-puzzle1 = Puzzle(2, 4, puzzle_arr[0], 0, None)
-
-goal1, goal2 = util.createGoalStates(puzzle1)
-
-# Create open and closed lists
-open_list = myQueue()
-open_list.push_a_star(puzzle1)
-closed_list = []
-
 """
 Runs the A* algorithm for a given Puzzle with a chosen Heuristic.
 
@@ -32,6 +23,11 @@ Parameters:
     heuristic: int heuristic index 0, 1 or 2
 """
 def run_a_star(puzzle, goal1, goal2, heuristic):
+    # Create open and closed lists
+    open_list = myQueue()
+    open_list.push_a_star(puzzle)
+    closed_list = []
+    
     goalReached = False
     
     time_start = time.time()
@@ -100,7 +96,7 @@ def run_a_star(puzzle, goal1, goal2, heuristic):
     print("GOAL REACHED? ", goalReached)
     return closed_list, goalReached, (time.time() - time_start)
 
-def run_50():
+def run_50(heuristic):
     total_solution_path = 0
     total_search_path = 0
     total_number_no_solution = 0
@@ -114,16 +110,10 @@ def run_50():
         goal1, goal2 = util.createGoalStates(currPuzzle)
         
         # Run A*
-        search_list, goalReached, time_taken = run_a_star(currPuzzle, goal1, goal2, 2)
+        search_list, goalReached, time_taken = run_a_star(currPuzzle, goal1, goal2, heuristic)
 
         # Get Solution path
         solution_list = util.create_solution_list(search_list[-1])
-        
-        if goalReached:
-            util.output_solution_list(solution_list, i, time_taken, search_list[-1].g_cost, "astar")
-            util.output_search_list(search_list, i, "astar")
-        else:
-            util.output_no_solution(i, "astar")
         
         # Calculate total values
         total_solution_path += len(solution_list)
@@ -132,6 +122,29 @@ def run_50():
         total_cost += search_list[-1].g_cost
         total_time += time_taken
     
-    util.output_analysis_50(total_solution_path, total_search_path, total_number_no_solution, total_cost, total_time, "astar")
+    util.output_analysis_50(total_solution_path, total_search_path, total_number_no_solution, total_cost, total_time, "astar", "h"+str(heuristic))
 
-run_50()
+def run(heuristic):
+    for i in range(3):
+        currPuzzle = Puzzle(2, 4, puzzle_arr[i], 0, None)
+        
+        # Get goal states
+        goal1, goal2 = util.createGoalStates(currPuzzle)
+        
+        # Run A*
+        search_list, goalReached, time_taken = run_a_star(currPuzzle, goal1, goal2, heuristic)
+
+        # Get Solution path
+        solution_list = util.create_solution_list(search_list[-1])
+        
+        if goalReached:
+            util.output_solution_list(solution_list, i, time_taken, search_list[-1].g_cost, "astar", "h"+str(heuristic))
+            util.output_search_list(search_list, i, "astar", "h"+str(heuristic))
+        else:
+            util.output_no_solution(i, "astar", "h"+str(heuristic))
+
+run(2)
+run_50(2)
+# p = Puzzle(2,4,puzzle_arr[1],0,None)
+# goal1, goal2 = util.createGoalStates(p)
+# run_a_star(p,goal1,goal2,2)
