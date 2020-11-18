@@ -3,12 +3,12 @@ import util
 from Puzzle import Puzzle
 from myQueue import myQueue
 
-try: import operator
-except ImportError: keyfun = lambda x: x.h_cost
-else: keyfun = operator.attrgetter("h_cost")
-
 puzzle_arr = util.read_puzzle() #puzzle_arr contains all the initial puzzle in a list
 goal1, goal2 = util.createGoalStates()
+
+
+def __remove_if_in_closed(success_list):
+    return [item for item in success_list if item not in closed_list]
 
 def run_with_h0(puzzle):
     
@@ -30,25 +30,25 @@ def run_with_h0(puzzle):
         else:
             # find successors
             successors = util.find_successors(puzzle)
+            successors = __remove_if_in_closed(successors)
             
-            # find best successor
+            # find best successor if have any
             for s in successors:
                 s.h0()
                 # our priority queue will sort by h(n) and remove duplicates
                 open_list.push_sort_gbfs(s)
-                
-            bestSuccessor = open_list[0]
-                    
-            if bestSuccessor.h_cost < currentNode.h_cost:
-                closed_list.insert(0, bestSuccessor)
+               
+            # see if successor has lower h(n) than current node
+            if len(open_list) > 0:
+                bestSuccessor = open_list[0]
+                        
+                if bestSuccessor.h_cost < currentNode.h_cost:
+                    closed_list.insert(0, bestSuccessor)
+                else:
+                    reach_goal = True  # nothing can beat current node
             else:
-                reach_goal = True  # nothing can beat current node
-        
-        
-    # add to list
-    
-    # sort by h_cost
-    #successors.sort(key=keyfun, reverse=True)
+                # no solution if open list is empty and goal is not reached
+                break
     
     for s in successors:
         print(s.showState())
