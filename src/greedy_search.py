@@ -4,10 +4,11 @@ from Puzzle import Puzzle
 from myQueue import myQueue
 
 puzzle_arr = util.read_puzzle() #puzzle_arr contains all the initial puzzle in a list
-goal1, goal2 = util.createGoalStates()
+puzzle = Puzzle(2, 4, puzzle_arr[0], 0)
+goal1, goal2 = util.createGoalStates(puzzle)
 
 
-def __remove_if_in_closed(success_list):
+def __remove_if_in_closed(success_list, closed_list):
     return [item for item in success_list if item not in closed_list]
 
 def run_with_h0(puzzle):
@@ -30,7 +31,7 @@ def run_with_h0(puzzle):
         else:
             # find successors
             successors = util.find_successors(puzzle)
-            successors = __remove_if_in_closed(successors)
+            successors = __remove_if_in_closed(successors, closed_list)
             
             # find best successor if have any
             for s in successors:
@@ -39,8 +40,8 @@ def run_with_h0(puzzle):
                 open_list.push_sort_gbfs(s)
                
             # see if successor has lower h(n) than current node
-            if len(open_list) > 0:
-                bestSuccessor = open_list[0]
+            if open_list._data:
+                bestSuccessor = open_list.pop()
                         
                 if bestSuccessor.h_cost < currentNode.h_cost:
                     closed_list.insert(0, bestSuccessor)
@@ -50,8 +51,13 @@ def run_with_h0(puzzle):
                 # no solution if open list is empty and goal is not reached
                 break
     
-    for s in successors:
-        print(s.showState())
+    if not reach_goal:
+        print("No solution found with GBFS")
+    else:
+        # find solution path
+        for i in range(len(closed_list)):
+            print(closed_list[i].showState())
+        
 
 # end func
 
@@ -61,5 +67,5 @@ def run_gbfs(puzzle):
     run_with_h0(puzzle)
     
 
-puzzle = Puzzle(2, 4, puzzle_arr[0], 0)
+
 run_with_h0(puzzle)
