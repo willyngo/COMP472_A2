@@ -303,6 +303,9 @@ class Puzzle:
         child.__swapNumbers(zero_index, move_index)
         return child
     
+    def __eq__(self, other):
+        return self.matrix == other.matrix
+    
     """
     Calculates and Assigns the heuristic h0 
     Returns the puzzle's h0 heuristic
